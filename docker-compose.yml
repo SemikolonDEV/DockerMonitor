@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY-}dockermonitorcore
     build:
       context: .
-      dockerfile: DockerMonitor.Core/Dockerfile
+      dockerfile: DockerMonitor.Core\Dockerfile
