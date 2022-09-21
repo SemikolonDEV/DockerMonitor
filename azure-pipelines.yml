@@ -1,0 +1,46 @@
+trigger:
+- main
+
+resources:
+- repo: self
+
+pool: 'Default'
+
+
+steps:
+- checkout: self
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.x'
+
+- task: DotNetCoreCLI@2
+  displayName: "Run unit tests"
+  inputs:
+    command: test
+    projects: "**/*[Tt]est*/*.csproj"
+    publishTestResults: true
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:excludebyfile="**/Data/Migrations/*.cs" /p:SkipAutoProps=true'
+
+- task: reportgenerator@5
+  displayName: Generate coverage report
+  inputs:
+    reports: "$(Build.SourcesDirectory)/**/*.cobertura.xml"
+    targetdir: "$(Build.SourcesDirectory)/CoverageResults"
+
+- task: PublishCodeCoverageResults@1
+  displayName: Publish code coverage results
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: "$(Build.SourcesDirectory)/CoverageResults/Cobertura.xml"
+
+- task: Docker@2
+  inputs:
+    repository: 'localhost:5000/backend'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    buildContext: './'
+    tags: |
+      $(Build.BuildId)
+      latest
