@@ -27,15 +27,26 @@ public class DockerInformation : IDockerInformation
             State = containerResponse.State,
             Created = containerResponse.Created,
             Labels = containerResponse.Labels,
-            
         });
-
     }
 
     public async Task<ContainerStats> GetContainerStats(string id, CancellationToken cancellationToken = default)
     {
-       var statsProgress = new StatsProgress();
-       await _dockerClient.Containers.GetContainerStatsAsync(id,new ContainerStatsParameters(), statsProgress, cancellationToken);
+       var progress = new Progress<ContainerStatsResponse>(value =>
+       {
+           var networks = value.Networks.Select(d => d.Key);
+       });
+       await _dockerClient.Containers.GetContainerStatsAsync(id, new ContainerStatsParameters { }, progress, cancellationToken);
+        return null;
+    }
 
+    public async Task<bool> StartContainer(string id, CancellationToken cancellationToken = default)
+    {
+        return await _dockerClient.Containers.StartContainerAsync(id, new ContainerStartParameters { }, cancellationToken);
+    }
+
+    public async Task<bool> StopContainer(string id, CancellationToken cancellationToken  = default)
+    {
+        return await _dockerClient.Containers.StopContainerAsync(id, new ContainerStopParameters { } , cancellationToken);
     }
 }

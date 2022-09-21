@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dockermonitor.core:
+    image: ${DOCKER_REGISTRY-}dockermonitorcore
+    build:
+      context: .
+      dockerfile: DockerMonitor.Core/Dockerfile

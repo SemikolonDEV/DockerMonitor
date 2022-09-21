@@ -5,9 +5,13 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerMonitor.Core", "DockerMonitor.Core\DockerMonitor.Core.csproj", "{DA657C92-6E8E-4D59-B535-F00FD47CD5DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerMonitor.Infastructure", "DockerMonitor.Infastructure\DockerMonitor.Infastructure.csproj", "{80D60B1B-3D76-47FE-9233-A6F988B997EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerMonitor.Infastructure", "DockerMonitor.Infastructure\DockerMonitor.Infastructure.csproj", "{80D60B1B-3D76-47FE-9233-A6F988B997EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerMonitor.Domain", "DockerMonitor.Domain\DockerMonitor.Domain.csproj", "{A42B443F-6D03-4052-9132-A4763D1DCB85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerMonitor.Domain", "DockerMonitor.Domain\DockerMonitor.Domain.csproj", "{A42B443F-6D03-4052-9132-A4763D1DCB85}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devops", "devops", "{4B1D9BB7-54A1-46D0-8137-AD68465E2942}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3B131866-1794-401B-AF35-83B40293F666}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,10 @@ Global
 		{A42B443F-6D03-4052-9132-A4763D1DCB85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A42B443F-6D03-4052-9132-A4763D1DCB85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A42B443F-6D03-4052-9132-A4763D1DCB85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B131866-1794-401B-AF35-83B40293F666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B131866-1794-401B-AF35-83B40293F666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B131866-1794-401B-AF35-83B40293F666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B131866-1794-401B-AF35-83B40293F666}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
