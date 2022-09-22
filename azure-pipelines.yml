@@ -21,19 +21,19 @@ steps:
     command: test
     projects: "**/*[Tt]est*/*.csproj"
     publishTestResults: true
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:excludebyfile="**/Data/Migrations/*.cs" /p:SkipAutoProps=true'
+    arguments: '--collect:"XPlat Code Coverage"'
 
 - task: reportgenerator@5
   displayName: Generate coverage report
   inputs:
-    reports: "$(Build.SourcesDirectory)/**/*.cobertura.xml"
-    targetdir: "$(Build.SourcesDirectory)/CoverageResults"
+      reports: "$(Agent.TempDirectory)/**/*.cobertura.xml"
+      targetdir: "$(Agent.TempDirectory)/CoverageResults"
 
 - task: PublishCodeCoverageResults@1
   displayName: Publish code coverage results
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: "$(Build.SourcesDirectory)/CoverageResults/Cobertura.xml"
+    summaryFileLocation: "$(Agent.TempDirectory)/CoverageResults/Cobertura.xml"
 
 - task: Docker@2
   inputs:
