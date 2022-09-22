@@ -14,4 +14,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DockerMonitor.Domain\DockerMonitor.Domain.csproj" />
+    <ProjectReference Include="..\DockerMonitor.Services\DockerMonitor.Services.csproj" />
+  </ItemGroup>
+
 </Project>
