@@ -24,7 +24,7 @@ public class DockerController : ControllerBase
         return Ok(conatinerList);
     }
 
-    [HttpGet]
+    [HttpGet("{id:string}")]
     public async Task<ActionResult<ContainerInfo>> GetContainerInfo(string id, CancellationToken cancellationToken = default)
     {
         var conatiner = await _dockerService.GetContainerInfo(id, cancellationToken);
