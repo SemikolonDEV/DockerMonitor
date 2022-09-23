@@ -1,8 +1,16 @@
+using DockerMonitor.Domain;
+using DockerMonitor.Infastructure;
+using DockerMonitor.Services;
+using DockerMonitor.Services.Abstractions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
+builder.Services.AddTransient<IDockerInformation, DockerInformation>();
+builder.Services.AddTransient<IDockerService, DockerService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

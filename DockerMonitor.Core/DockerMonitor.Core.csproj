@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DockerMonitor.Domain\DockerMonitor.Domain.csproj" />
+    <ProjectReference Include="..\DockerMonitor.Infastructure\DockerMonitor.Infastructure.csproj" />
     <ProjectReference Include="..\DockerMonitor.Services\DockerMonitor.Services.csproj" />
   </ItemGroup>
 

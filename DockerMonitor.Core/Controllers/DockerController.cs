@@ -1,6 +1,5 @@
 ﻿using DockerMonitor.Domain;
-using DockerMonitor.Services;
-using Microsoft.AspNetCore.Http;
+using DockerMonitor.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DockerMonitor.Core.Controllers;
@@ -10,9 +9,9 @@ namespace DockerMonitor.Core.Controllers;
 public class DockerController : ControllerBase
 {
 
-    private readonly DockerService _dockerService;
+    private readonly IDockerService _dockerService;
 
-    public DockerController(DockerService dockerService)
+    public DockerController(IDockerService dockerService)
     {
         _dockerService = dockerService;
     }
@@ -24,13 +23,25 @@ public class DockerController : ControllerBase
         return Ok(conatinerList);
     }
 
-    [HttpGet("{id:string}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<ContainerInfo>> GetContainerInfo(string id, CancellationToken cancellationToken = default)
     {
         var conatiner = await _dockerService.GetContainerInfo(id, cancellationToken);
         return Ok(conatiner);
     }
 
+    [HttpGet("start/{id}")]
+    public async Task<ActionResult<bool>> StartContainer(string id, CancellationToken cancellationToken = default)
+    {
+        var isSucess = await _dockerService.StartContainer(id, cancellationToken);
+        return Ok(isSucess);
+    }
 
+    [HttpGet("stop/{id}")]
+    public async Task<ActionResult<bool>> StopContainer(string id, CancellationToken cancellationToken = default)
+    {
+        var isSucess = await _dockerService.StopContainer(id, cancellationToken);
+        return Ok(isSucess);
+    }
 
 }
