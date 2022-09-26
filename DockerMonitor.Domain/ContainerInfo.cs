@@ -9,6 +9,7 @@ namespace DockerMonitor.Domain;
 public class ContainerInfo
 {
     public string Id { get; set; }
+    public IList<string> Names { get; set; }
     public string Image { get; set; }
     public string State { get; set; }
     public DateTime Created { get; set; }

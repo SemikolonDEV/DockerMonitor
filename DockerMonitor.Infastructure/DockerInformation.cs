@@ -23,6 +23,7 @@ public class DockerInformation : IDockerInformation
         return containers.Select(containerResponse => new ContainerInfo 
         {
             Id = containerResponse.ID,
+            Names = containerResponse.Names,
             Image = containerResponse.Image,
             State = containerResponse.State,
             Created = containerResponse.Created,
