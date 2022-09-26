@@ -1,6 +1,9 @@
 ﻿using Docker.DotNet;
 using Docker.DotNet.Models;
-using DockerMonitor.Domain;
+using DockerMonitor.Domain.Entities;
+using DockerMonitor.Domain.Exceptions;
+using DockerMonitor.Domain.Interfaces;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 namespace DockerMonitor.Infastructure;
@@ -28,6 +31,24 @@ public class DockerInformation : IDockerInformation
             Created = containerResponse.Created,
             Labels = containerResponse.Labels,
         });
+    }
+
+    public async Task<ContainerInfo> GetContainer(string id, CancellationToken cancellationToken = default)
+    {
+        var containerList = await _dockerClient.Containers.ListContainersAsync(new ContainersListParameters { All= true }, cancellationToken);
+        var containerResponse = containerList.SingleOrDefault(c => c.ID == id);
+        if (containerResponse == null)
+        {
+            throw new ContainerNotFoundException();
+        }
+        return new ContainerInfo
+        {
+            Id = containerResponse.ID,
+            Image = containerResponse.Image,
+            State = containerResponse.State,
+            Created = containerResponse.Created,
+            Labels = containerResponse.Labels,
+        };
     }
 
     public async Task<ContainerStats> GetContainerStats(string id, CancellationToken cancellationToken = default)

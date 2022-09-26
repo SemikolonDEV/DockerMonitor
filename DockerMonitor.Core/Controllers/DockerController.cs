@@ -1,4 +1,4 @@
-﻿using DockerMonitor.Domain;
+﻿using DockerMonitor.Domain.Entities;
 using DockerMonitor.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 

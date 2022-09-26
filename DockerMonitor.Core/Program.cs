@@ -1,4 +1,4 @@
-using DockerMonitor.Domain;
+using DockerMonitor.Domain.Interfaces;
 using DockerMonitor.Infastructure;
 using DockerMonitor.Services;
 using DockerMonitor.Services.Abstractions;

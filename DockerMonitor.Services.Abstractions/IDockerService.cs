@@ -1,4 +1,4 @@
-﻿using DockerMonitor.Domain;
+﻿using DockerMonitor.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

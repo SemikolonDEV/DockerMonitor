@@ -1,4 +1,5 @@
-﻿using DockerMonitor.Domain;
+﻿using DockerMonitor.Domain.Entities;
+using DockerMonitor.Domain.Interfaces;
 using DockerMonitor.Services.Abstractions;
 
 namespace DockerMonitor.Services;
