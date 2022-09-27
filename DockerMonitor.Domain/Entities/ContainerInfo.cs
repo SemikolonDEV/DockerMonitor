@@ -14,4 +14,5 @@ public class ContainerInfo
     public string State { get; set; }
     public DateTime Created { get; set; }
     public IDictionary<string, string> Labels { get; set; }
+    public IEnumerable<string> Volumes { get; set; }
 }

@@ -7,7 +7,7 @@ public class UnitTest1
     {
         var one = 1.0055m;
 
-        one = Math.Round(one, 2);
+        one = Math.Round(one, 2, MidpointRounding.ToZero);
 
         one.Should().Be(1.00m);
         

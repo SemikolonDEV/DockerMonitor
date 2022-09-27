@@ -30,6 +30,7 @@ public class DockerInformation : IDockerInformation
             State = containerResponse.State,
             Created = containerResponse.Created,
             Labels = containerResponse.Labels,
+            Volumes = containerResponse.Mounts.Select(d  => $"{d.Source}:{d.Destination}")
         });
     }
 
@@ -49,6 +50,7 @@ public class DockerInformation : IDockerInformation
             State = containerResponse.State,
             Created = containerResponse.Created,
             Labels = containerResponse.Labels,
+            Volumes = containerResponse.Mounts.Select(d => $"{d.Source}:{d.Destination}")
         };
     }
 
