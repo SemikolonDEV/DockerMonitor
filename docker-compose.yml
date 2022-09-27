@@ -5,4 +5,12 @@ services:
     image: ${DOCKER_REGISTRY-}dockermonitorcore
     build:
       context: .
-      dockerfile: DockerMonitor.Core\Dockerfile
+      dockerfile: DockerMonitor.Core/Dockerfile
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: "sqlserver"
+    hostname: "sqlserver"
+  grafana:
+    image: grafana/grafana
+    ports:
+     - "3000:3000"

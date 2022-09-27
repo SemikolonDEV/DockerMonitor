@@ -13,18 +13,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerMonitor.Services", "D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerMonitor.Services.Abstractions", "DockerMonitor.Services.Abstractions\DockerMonitor.Services.Abstractions.csproj", "{886F74B7-1EEA-4743-BAA9-0C045AFAF638}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{83B7ABA2-8F5D-4F97-B514-1B8B41BA9A5E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devops", "devops", "{E307BBA3-EE74-4F76-8FE4-F68EEE23009D}"
 	ProjectSection(SolutionItems) = preProject
 		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerMonitor.Test", "test\DockerMonitor.Test\DockerMonitor.Test.csproj", "{728C1E62-561B-4D9E-9C2E-F4DC5DFA1E21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerMonitor.Test", "test\DockerMonitor.Test\DockerMonitor.Test.csproj", "{728C1E62-561B-4D9E-9C2E-F4DC5DFA1E21}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4D642BB1-9C60-4CEA-A99F-EFCDD337D229}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{651A7DF6-163F-40B8-9A06-89AABAA3165B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A601F727-030F-4AD9-8DCC-056AAFAADE9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,14 +52,14 @@ Global
 		{886F74B7-1EEA-4743-BAA9-0C045AFAF638}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{886F74B7-1EEA-4743-BAA9-0C045AFAF638}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{886F74B7-1EEA-4743-BAA9-0C045AFAF638}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83B7ABA2-8F5D-4F97-B514-1B8B41BA9A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83B7ABA2-8F5D-4F97-B514-1B8B41BA9A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83B7ABA2-8F5D-4F97-B514-1B8B41BA9A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83B7ABA2-8F5D-4F97-B514-1B8B41BA9A5E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{728C1E62-561B-4D9E-9C2E-F4DC5DFA1E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{728C1E62-561B-4D9E-9C2E-F4DC5DFA1E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{728C1E62-561B-4D9E-9C2E-F4DC5DFA1E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{728C1E62-561B-4D9E-9C2E-F4DC5DFA1E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A601F727-030F-4AD9-8DCC-056AAFAADE9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A601F727-030F-4AD9-8DCC-056AAFAADE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A601F727-030F-4AD9-8DCC-056AAFAADE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A601F727-030F-4AD9-8DCC-056AAFAADE9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,9 +19,9 @@ public class DockerService : IDockerService
         return await _dockerInformation.GetAllContainer(cancellationToken);
     }
 
-    public Task<ContainerInfo> GetContainerInfo(string id, CancellationToken cancellationToken = default)
+    public async Task<ContainerInfo> GetContainerInfo(string id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await _dockerInformation.GetContainer(id, cancellationToken);
     }
 
     public async Task<bool> StartContainer(string id, CancellationToken cancellationToken = default)

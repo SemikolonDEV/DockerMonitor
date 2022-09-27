@@ -3,7 +3,6 @@ using Docker.DotNet.Models;
 using DockerMonitor.Domain.Entities;
 using DockerMonitor.Domain.Exceptions;
 using DockerMonitor.Domain.Interfaces;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 namespace DockerMonitor.Infastructure;
@@ -17,13 +16,13 @@ public class DockerInformation : IDockerInformation
     {
         var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-        return isWindows ? new Uri("npipe://./pipe/docker_engine"): new Uri("unix:///var/run/docker.sock");
+        return isWindows ? new Uri("npipe://./pipe/docker_engine") : new Uri("unix:///var/run/docker.sock");
     }
 
     public async Task<IEnumerable<ContainerInfo>> GetAllContainer(CancellationToken cancellationToken = default)
     {
         var containers = await _dockerClient.Containers.ListContainersAsync(new ContainersListParameters { All = true }, cancellationToken);
-        return containers.Select(containerResponse => new ContainerInfo 
+        return containers.Select(containerResponse => new ContainerInfo
         {
             Id = containerResponse.ID,
             Names = containerResponse.Names,
@@ -36,15 +35,16 @@ public class DockerInformation : IDockerInformation
 
     public async Task<ContainerInfo> GetContainer(string id, CancellationToken cancellationToken = default)
     {
-        var containerList = await _dockerClient.Containers.ListContainersAsync(new ContainersListParameters { All= true }, cancellationToken);
+        var containerList = await _dockerClient.Containers.ListContainersAsync(new ContainersListParameters { All = true }, cancellationToken);
         var containerResponse = containerList.SingleOrDefault(c => c.ID == id);
-        if (containerResponse == null)
+        if (containerResponse is null)
         {
             throw new ContainerNotFoundException();
         }
         return new ContainerInfo
         {
             Id = containerResponse.ID,
+            Names = containerResponse.Names,
             Image = containerResponse.Image,
             State = containerResponse.State,
             Created = containerResponse.Created,
@@ -54,11 +54,11 @@ public class DockerInformation : IDockerInformation
 
     public async Task<ContainerStats> GetContainerStats(string id, CancellationToken cancellationToken = default)
     {
-       var progress = new Progress<ContainerStatsResponse>(value =>
-       {
-           var networks = value.Networks.Select(d => d.Key);
-       });
-       await _dockerClient.Containers.GetContainerStatsAsync(id, new ContainerStatsParameters { }, progress, cancellationToken);
+        var progress = new Progress<ContainerStatsResponse>(value =>
+        {
+            var networks = value.Networks.Select(d => d.Key);
+        });
+        await _dockerClient.Containers.GetContainerStatsAsync(id, new ContainerStatsParameters { }, progress, cancellationToken);
         return null;
     }
 
@@ -67,8 +67,8 @@ public class DockerInformation : IDockerInformation
         return await _dockerClient.Containers.StartContainerAsync(id, new ContainerStartParameters { }, cancellationToken);
     }
 
-    public async Task<bool> StopContainer(string id, CancellationToken cancellationToken  = default)
+    public async Task<bool> StopContainer(string id, CancellationToken cancellationToken = default)
     {
-        return await _dockerClient.Containers.StopContainerAsync(id, new ContainerStopParameters { } , cancellationToken);
+        return await _dockerClient.Containers.StopContainerAsync(id, new ContainerStopParameters { }, cancellationToken);
     }
 }
