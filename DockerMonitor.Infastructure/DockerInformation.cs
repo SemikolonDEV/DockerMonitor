@@ -54,14 +54,24 @@ public class DockerInformation : IDockerInformation
         };
     }
 
-    public async Task<ContainerStats> GetContainerStats(string id, CancellationToken cancellationToken = default)
+    public async void GetContainerStats(string id, Action<ContainerStat> act, CancellationToken cancellationToken = default)
     {
         var progress = new Progress<ContainerStatsResponse>(value =>
         {
-            var networks = value.Networks.Select(d => d.Key);
+            var containerStats = new ContainerStat
+            {
+                DBContainerId = value.ID,
+                TimeStamp = value.Read,
+                CPUUsage = value.CPUStats.CPUUsage.TotalUsage,
+                Cores = value.CPUStats.OnlineCPUs,
+                MemoryUsage = value.MemoryStats.Usage,
+                MemoryMax = value.MemoryStats.Limit,
+                ReadSize = value.StorageStats.ReadSizeBytes,
+                WriteSize = value.StorageStats.WriteSizeBytes
+            };
+            act(containerStats);
         });
-        await _dockerClient.Containers.GetContainerStatsAsync(id, new ContainerStatsParameters { }, progress, cancellationToken);
-        return null;
+        await _dockerClient.Containers.GetContainerStatsAsync(id, new ContainerStatsParameters { OneShot = true, Stream = false }, progress, cancellationToken);
     }
 
     public async Task<bool> StartContainer(string id, CancellationToken cancellationToken = default)

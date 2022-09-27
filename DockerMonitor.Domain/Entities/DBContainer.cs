@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace DockerMonitor.Domain.Entities
 {
-    public class ContainerStats
+    public class DBContainer
     {
+
+        public string DBContainerId { get; set; }
+
+        public List<ContainerStat> Stats { get; } = new();
+
     }
 }

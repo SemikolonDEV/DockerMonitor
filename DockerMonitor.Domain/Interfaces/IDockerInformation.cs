@@ -9,7 +9,7 @@ public interface IDockerInformation
 
     public Task<ContainerInfo> GetContainer(string id, CancellationToken cancellationToken = default);
 
-    public Task<ContainerStats> GetContainerStats(string id, CancellationToken cancellationToken = default);
+    public void GetContainerStats(string id, Action<ContainerStat> act, CancellationToken cancellationToken = default);
 
     public Task<bool> StartContainer(string id, CancellationToken cancellationToken = default);
 
