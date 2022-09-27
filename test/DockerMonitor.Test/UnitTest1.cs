@@ -9,7 +9,7 @@ public class UnitTest1
 
         one = Math.Round(one, 2);
 
-        one.Should().Be(1);
+        one.Should().Be(1.00m);
         
     }
 }
