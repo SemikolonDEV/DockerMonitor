@@ -18,10 +18,8 @@ public class ContainerStatsService : BackgroundService, IDisposable
 
     private async Task DoWork(CancellationToken cancellationToken)
     {
-
         while (isRunning)
         {
-            await Task.Delay(20000);
             var scope = _services.CreateScope();
             var dockerInformation = scope.ServiceProvider.GetRequiredService<IDockerInformation>();
             var container = await dockerInformation.GetAllContainer();
@@ -46,9 +44,8 @@ public class ContainerStatsService : BackgroundService, IDisposable
                     await unitOfWork.SaveChangesAsync();
                 });
             }
-            
+            await Task.Delay(30000);
         }
-
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
