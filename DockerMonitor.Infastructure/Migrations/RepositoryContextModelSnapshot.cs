@@ -3,7 +3,6 @@ using System;
 using DockerMonitor.Infastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -18,40 +17,38 @@ namespace DockerMonitor.Infastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.9")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("DockerMonitor.Domain.Entities.ContainerStat", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
-                    b.Property<decimal>("CPUUsage")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<ulong>("CPUUsage")
+                        .HasColumnType("bigint unsigned");
 
-                    b.Property<long>("Cores")
-                        .HasColumnType("bigint");
+                    b.Property<uint>("Cores")
+                        .HasColumnType("int unsigned");
 
                     b.Property<string>("DBContainerId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<decimal>("MemoryMax")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<ulong>("MemoryMax")
+                        .HasColumnType("bigint unsigned");
 
-                    b.Property<decimal>("MemoryUsage")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<ulong>("MemoryUsage")
+                        .HasColumnType("bigint unsigned");
 
-                    b.Property<decimal>("ReadSize")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<ulong>("ReadSize")
+                        .HasColumnType("bigint unsigned");
 
                     b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<decimal>("WriteSize")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<ulong>("WriteSize")
+                        .HasColumnType("bigint unsigned");
 
                     b.HasKey("Id");
 
@@ -63,7 +60,7 @@ namespace DockerMonitor.Infastructure.Migrations
             modelBuilder.Entity("DockerMonitor.Domain.Entities.DBContainer", b =>
                 {
                     b.Property<string>("DBContainerId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("DBContainerId");
 

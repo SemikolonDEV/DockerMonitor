@@ -20,8 +20,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContextPool<RepositoryContext>(contextBuilder =>
 {
     // ConnectionString
+
     var connectionString = builder.Configuration.GetConnectionString("DockerStatsContext");
-    contextBuilder.UseSqlServer(connectionString);
+    var serverVersion= ServerVersion.AutoDetect(connectionString);
+    contextBuilder.UseMySql(connectionString, serverVersion);
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

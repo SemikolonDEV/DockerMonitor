@@ -9,7 +9,7 @@ services:
     volumes:
      - "/var/run/docker.sock:/var/run/docker.sock" 
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mariadb:latest
     container_name: "sqlserver"
     hostname: "sqlserver"
   grafana:

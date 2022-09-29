@@ -5,7 +5,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ConnectionStrings__DockerStatsContext=Server=sqlserver;User=sa;Password=Development_Password;MultipleActiveResultSets=True;
+      - ConnectionStrings__DockerStatsContext=server=sqlserver;database=ContainerStats;user=root;password=Development_Password;
     ports:
       - "80"
       - "443"
@@ -14,13 +14,12 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
   db:
     environment:  
-      SA_PASSWORD: "Development_Password"
-      ACCEPT_EULA: "Y"
+      MARIADB_DATABASE: "ContainerStats"
+      MARIADB_ROOT_PASSWORD: "Development_Password"
     ports:  
-      - "1433:1433"
+      - "3306:3306"
     expose:  
       - 1433
     restart: always
     volumes:
-      - ./.mssql/data:/var/opt/mssql/data 
-      - ./.mssql/log:/var/opt/mssql/log
+      - ./.mysql:/var/lib/mysql

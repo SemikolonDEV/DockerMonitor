@@ -9,30 +9,36 @@ namespace DockerMonitor.Infastructure.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "Containers",
                 columns: table => new
                 {
-                    DBContainerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    DBContainerId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Containers", x => x.DBContainerId);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "ContainersStats",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CPUUsage = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
-                    Cores = table.Column<long>(type: "bigint", nullable: false),
-                    MemoryUsage = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
-                    MemoryMax = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
-                    ReadSize = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
-                    WriteSize = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
-                    DBContainerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    TimeStamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CPUUsage = table.Column<ulong>(type: "bigint unsigned", nullable: false),
+                    Cores = table.Column<uint>(type: "int unsigned", nullable: false),
+                    MemoryUsage = table.Column<ulong>(type: "bigint unsigned", nullable: false),
+                    MemoryMax = table.Column<ulong>(type: "bigint unsigned", nullable: false),
+                    ReadSize = table.Column<ulong>(type: "bigint unsigned", nullable: false),
+                    WriteSize = table.Column<ulong>(type: "bigint unsigned", nullable: false),
+                    DBContainerId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -43,7 +49,8 @@ namespace DockerMonitor.Infastructure.Migrations
                         principalTable: "Containers",
                         principalColumn: "DBContainerId",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ContainersStats_DBContainerId",
