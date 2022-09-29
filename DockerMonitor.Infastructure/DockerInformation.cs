@@ -83,4 +83,10 @@ public class DockerInformation : IDockerInformation
     {
         return await _dockerClient.Containers.StopContainerAsync(id, new ContainerStopParameters { }, cancellationToken);
     }
+
+    public async Task RemoveContainer(string id, CancellationToken cancellationToken = default)
+    {
+        var removeParameters = new ContainerRemoveParameters { Force = false, RemoveVolumes = false };
+        await _dockerClient.Containers.RemoveContainerAsync(id, removeParameters ,cancellationToken);
+    }
 }

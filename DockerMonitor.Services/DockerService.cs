@@ -24,6 +24,19 @@ public class DockerService : IDockerService
         return await _dockerInformation.GetContainer(id, cancellationToken);
     }
 
+    public async Task<bool> RemoveContainer(string id, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await _dockerInformation.RemoveContainer(id, cancellationToken);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
     public async Task<bool> StartContainer(string id, CancellationToken cancellationToken = default)
     {
         return await _dockerInformation.StartContainer(id, cancellationToken);

@@ -18,5 +18,7 @@ public interface IDockerService
 
     public Task<bool> StopContainer(string id, CancellationToken cancellationToken = default);
 
+    public Task<bool> RemoveContainer(string id, CancellationToken cancellationToken = default);
+
 
 }

@@ -44,4 +44,11 @@ public class DockerController : ControllerBase
         return Ok(isSucess);
     }
 
+    [HttpGet("remove/{id}")]
+    public async Task<ActionResult<bool>> RemoveContainer(string id, CancellationToken cancellationToken = default)
+    {
+        var isSucess = await _dockerService.RemoveContainer(id, cancellationToken);
+        return Ok(isSucess);
+    }
+
 }
