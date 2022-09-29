@@ -48,4 +48,4 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'docker compose up -d'
-    workingDirectory: '~/dockermonitor'
+    workingDirectory: '/home/pi/dockermonitor'
